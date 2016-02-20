@@ -1,0 +1,69 @@
+body {
+  background: #369; }
+
+.blog > h1 {
+  color: red;
+  border: 1px solid red; }
+.blog .entry {
+  background: white;
+  margin: 5px;
+  padding: 7.5px; }
+  .blog .entry h1 {
+    font-size: 20px;
+    color: blue;
+    margin: 5px 0 0 5px; }
+  .blog .entry p {
+    font-size: 12px;
+    margin: 20px; }
+    html.csscolumns .blog .entry p {
+      column-count: 2;
+      column-gap: 10px;
+      margin: 10px; }
+  .blog .entry a {
+    color: red; }
+    .blog .entry a:hover {
+      color: blue; }
+  .blog .entry .date {
+    font-size: 0.3em;
+    color: #369; }
+  .blog .entry a {
+    color: #369; }
+
+/* MIXIN EXAMPLE */
+/* create mixin here */
+/*then include in classes you wish */
+.box {
+  border-radius: 4px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px; }
+  .box a {
+    color: blue; }
+
+.button {
+  border-radius: 2px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background: #345; }
+  .button a {
+    color: red; }
+
+/* EXTEND EXAMPLE------
+extends allow you to extend the attributes from one class or id into another selector. % symbols are used to create a placeholder class to reference, i.e. a variable to use in extends */
+.menu, .nav {
+  height: 14px;
+  font-size: 10px; }
+  .menu > div, .nav > div {
+    float: left;
+    clear: none; }
+
+.menu {
+  background: #345; }
+
+/* Tells the computer to use the css columns stuff */
+/* This is not super important to understand yet*/
+html.csscolumns .blog .entry p {
+  column-count: 2;
+  column-gap: 10px;
+  margin: 10px; }
+
+/*# sourceMappingURL=main.css.map */
