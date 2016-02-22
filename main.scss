@@ -2,6 +2,7 @@ $primary-color: #369;
 $margin: 5px;
 $padding: $margin * 1.5;
 
+
 body {
   background: $primary-color;
 }
@@ -99,6 +100,133 @@ extends allow you to extend the attributes from one class or id into another sel
 .nav {
   @extend %bar;
 }
+
+/* IMPORT EXAMPLE-----
+When working on a large site, we want to use more than one style sheet to keep things organized and easier to follow-*/
+
+@import "_variables.scss";  //Sass knows that if there's an underscore, don't generate a CSS file to match it. Then we can use that file to just define all of the variables, for example, and import it into our main sass file" //
+
+@import "_globals.scss"; // Stylesheet just for global styles */
+
+@import "_mixins.scss";
+
+//Often the main.scss stylesheet will be mostly full of imports from other scss files //
+
+@import "_reset.scss";
+//****RESET CSS**** -- copy reset css file code from the internet and make a new scss file called _reset.scss, then import it into main. This takes away lots of default styles inherited from browsers //
+
+
+// SASS FUNCITONS ___________________________//
+$color: orange;
+
+@function pxify($value) {
+  @return unquote($value + "px");
+}
+
+
+  div {
+    height: 100px;
+    width: 255px;
+    border: 1px solid black;
+  }
+
+  .color {
+    background: $color;
+  }
+
+  .red, .blue, .green {
+    float: left;
+  }
+
+  .red {
+    background: red;
+    width: pxify(red($color));
+  }
+
+  .blue {
+    background: blue;
+    width: pxify(blue($color));
+  }
+
+  .green {
+    background: green;
+    width: pxify(green($color));
+  }
+
+  /* Interpolation  and IF/ELSE Example -----------------------*/
+
+  // .#{$color} is equivalent to + $color + //
+
+  @mixin color_class($color) {
+    .#{$color} {
+      color: $color;
+      background-image: url("images/#{$color}.jpg");
+      @if $color == red {
+        border: 1px solid black;
+      }
+    }
+  }
+
+  @mixin box($width) {
+    @if $width > 100px {
+      padding: 0px;
+    } @else if $width == 100px {
+      padding: 5px;
+    }
+    @else {
+      padding: 10px;
+    }
+  }
+
+  div {
+    @include box(100px);
+  }
+
+  @include color_class(blue);
+  @include color_class(green);
+  @include color_class(green);
+
+
+/* FOR/EACH loops EXAMPLE with advanced mixin-----------------------*/
+
+.box {
+  width: 100%;
+  height: 10px;
+  border: 1px solid black;
+}
+
+@for $i from 1 through 100 { //number of .box divs //
+  .box:nth-child(#{$i}) {
+    background: darken(white, $i);
+  }
+}
+
+/* */
+
+@mixin box($size: 10px, $color: black, $display: block) {
+  width: $size;
+  height: $size;
+  background: $color;
+  display: $display;
+}
+
+.box {
+  @include box($display: inline);
+}
+
+
+@mixin band($name, $members...) {
+  @each $member in $members {
+    .#{name}.#{$member} {
+      background: url("images/#{$name}/#{$member}.jpg");
+    }
+  }
+}
+
+
+@include band(radiohead, thom, jonny, colin, phil);
+@include band(nin, trent);
+
 
 
 
